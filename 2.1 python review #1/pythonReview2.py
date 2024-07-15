@@ -12,4 +12,9 @@ def dislike(youtube_video):
 def add_comment(youtubevideo,username,comment_text):
 	comments={"username":comment_text}
 	return comments
-youtube video={"title":title,"description":description,"likes":,"dislikes":,"comments":}
+#youtube video={"title":title,"description":description,"likes":,"dislikes":,"comments":}
+youtube_video=create_youtube_video("day in my life","productive days getting my life together")
+for i in range(495):
+	youtube_video=like(youtube_video)
+youtube_video=dislike(youtube_video)
+print(add_comment(youtube_video,"nice","elian"))
