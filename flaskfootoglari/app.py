@@ -86,7 +86,7 @@ def pet3 ():
   <a href='/space3'>space3</a>'''
 
 
- @app.route('/space1')
+@app.route('/space1')
 def space1 ():
   return'''<html><img src=https://images.pexels.com/photos/41162/
   moon-landing-apollo-11-nasa-buzz-aldrin-41162.jpeg?cs=srgb&dl=pexels-pixabay
@@ -96,6 +96,20 @@ def space1 ():
   <a href='/space3'>space3</a>'''
 
 
+@app.route('/space2')
+def space2 ():
+  return'''<html><img src=https://encrypted-tbn0.gstatic.com/images?
+  q=tbn:ANd9GcTWQksIB0LNFHQFAC8yNhjfhxKEmXdOqhGQSFEl_M7USfZqLua
+  3RQeTfWeg9yTXYd3Gzo4&usqp=CAU></html>
+  <a href='/home'>home pj</a>
+  <a href='/space3'>space3</a>'''
+
+
+@app.route('/space3')
+def space3 (): 
+  return'''<html><img src=https://t4.ftcdn.net/jpg/03/86/82/73/360
+  _F_386827376_uWOOhKGk6A4UVL5imUBt20Bh8cmODqzx.jpg></html>
+  <a href='/home'>home pj</a>'''
 
 if __name__ == '__main__':
     app.run(debug=True)
