@@ -1,7 +1,7 @@
 <!doctype html>
 <ul>
-	{%for i in quotes%}
-	<li>{{i}}</li>
+	{%for i in login_session.values()%}
+	<li>{{i["quotes"]}}{{i["who_said"]}}</li>
 	{%endfor%}
 </ul>
 <a href="/home"> go to home </a>

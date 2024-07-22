@@ -11,13 +11,14 @@ firebaseConfig = {
   "storageBucket": "at-lab-8d96b.appspot.com",
   "messagingSenderId": "599364319259",
   "appId": "1:599364319259:web:04582398952719ea2b60be",
-  "databaseURL":""
+  "databaseURL":"https://at-lab-8d96b-default-rtdb.europe-west1.firebasedatabase.app/"
 }
 
 firebase = pyrebase.initialize_app(firebaseConfig) 
 
 auth = firebase.auth()
 
+db=firebase.database()
 
 @app.route('/',methods=['GET','POST'])
 def signup():
@@ -26,7 +27,15 @@ def signup():
     else: #if the method is post
         email = request.form['email']
         password = request.form['password']
+        username = request.form['username']
+        full_name = request.form['full_name']
         login_session['user'] = auth.create_user_with_email_and_password(email, password)
+        user={
+        "full_name":full_name,
+        "email":email,
+        "username":username
+        }
+        db.child('Users').child(session['user']['locaiId']).set(user)
         login_session['quotes'] = []
         login_session.modified = True
         return redirect(url_for('home'))
@@ -37,9 +46,17 @@ def signup():
 def home():
     if request.method == 'POST':
         quote = request.form["quotes"]
-        login_session['quotes'].append(quote)
-        login_session.modified = True
+        who_said=request.form["who_said"]
+        quotes={
+        "quote":quote,
+        "who_said":who_said,
+        "uid":session['user']['locaiId']
+        }
+        #login_session['quotes'].append(quote)
+        #login_session.modified = True
+        db.child("quotes").push(quotes)
         return redirect(url_for('thanks'))
+
     return render_template('home.html')
 
 
@@ -50,7 +67,7 @@ def home():
 
 @app.route('/display')
 def display():
-    return (render_template("display.html",quotes=login_session['quotes']))
+    return (render_template("display.html",login_session=db.child('quotes').get().val())
 
 
 
