@@ -9,14 +9,40 @@ Config = {
   "storageBucket": "personal-project-cd203.appspot.com",
   "messagingSenderId": "367460617784",
   "appId": "1:367460617784:web:a58b5e509c677912bf60cd",
-  "databaseURL":""
+  "databaseURL":"https://personal-project-cd203-default-rtdb.europe-west1.firebasedatabase.app/"
 }
 
 firebase = pyrebase.initialize_app(Config)
 auth = firebase.auth()
+db=firebase.database()
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['SECRET_KEY'] = 'super-secret-key'
+
+
+@app.route('/maya', methods=['GET','POST'])
+def maya():
+    if request.method=='POST':
+        conclusions=request.form['conclusions']
+        db.child("conclusions").push(conclusions)
+        return redirect(url_for("conclusions"))
+    return render_template("maya.html")
+
+
+
+@app.route('/shahar', methods=['GET','POST'])
+def shahar():
+    if request.method=='POST':
+        conclusions=request.form['conclusions']
+        db.child("conclusions").push(conclusions)
+        return redirect(url_for("conclusions"))
+    return render_template("shahar.html")
+
+@app.route('/conclusions')
+def conclusions():
+    conclusions = db.child("conclusions").get().val()
+    return render_template("conclusions.html", conclusions=conclusions)
+
 
 @app.route('/home')
 def home():
@@ -52,6 +78,9 @@ def signup():
         try:
             user = auth.create_user_with_email_and_password(email, password)
             session['user']= user
+            #UID = login_session['user']['localId']
+       # user = {"name": name, "email": email}
+        #db.child("Users").child(UID).set(user)
             return redirect(url_for('home'))
         except :
             error = "Authentication failed"
