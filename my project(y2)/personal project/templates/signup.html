@@ -42,19 +42,32 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
+      display: flex; /* Use flexbox for layout */
+      flex-direction: column; /* Stack content vertically */
+      justify-content: center; /* Center content vertically */
+      align-items: center; /* Center content horizontally */
+      min-height: 100vh; /* Set minimum height for full viewport */
       font-family: Arial, sans-serif; /* Set a clean, readable font */
       margin: 0; /* Remove default body margin for better layout */
     }
 
     form {
-      text-align: center; /* Center form elements */
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
       padding: 20px;
       border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+      width: 300px; /* Set a fixed width for the form */
     }
+
+     h1 {
+      text-align: center; /* Center the title */
+      margin-bottom: 20px;
+      font-size: 2em; /* Increase title size */
+  }
 
     input[type="text"],
     input[type="password"] {
-      width: 250px; /* Consistent width for input fields */
+      width: 100%; /* Consistent width for input fields */
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 3px;
@@ -68,6 +81,7 @@
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      width: 100%
     }
 
     a { /* Style the link for better readability */
