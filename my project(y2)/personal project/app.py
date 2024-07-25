@@ -91,11 +91,11 @@ def signup():
 
 @app.route('/signout')
 def signout():
-    login_session["user"]=None
+    session["user"]=None
     auth.current_user = None
-    login_session.modified = True
+    session.modified = True
     return redirect(url_for('signin'))
-    return 
+    
 
 
 
